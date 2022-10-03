@@ -9,7 +9,6 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     profileimg = models.ImageField(upload_to='profile_images',default ='profile-icon.png')
     location = models.CharField(max_length=100,blank=True)
-    # Add first and last name to this model
 
     def __str__(self):
         return self.user.username

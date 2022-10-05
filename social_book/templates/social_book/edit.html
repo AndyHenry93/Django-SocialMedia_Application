@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Edit_Page{% endblock title %}
+
+{% block content %}
+<body>
+    <div class="container m-auto"> 
+        <div>
+            <h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"><a href="{% url 'index' %}"><b>Home</b></a></h1>
+        </div>
+        <br>
+        <hr>
+        <div class="grid lg:grid-cols-3 mt-12 gap-8">
+            <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
+            {% comment %} Form Creation {% endcomment %}
+            <div class="flex justify-center flex-center text-center">
+                <div class="flex flex-col choose-upload text-center">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <p class="my-3 leading-6"><br><b>Edit Post</b></p>
+                        <div>
+                            <p>Current Post image</p>
+                            <img src="{{post.image.url}}" alt="">
+                            <br>
+                            <input type="file" name="image">
+                            <textarea class="button soft-warning small" name="caption">{{post.caption}}</textarea>
+                            <button class=" button bg-blue-700" type="submit">Change</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {% comment %} end form {% endcomment %}
+        </div>
+    </div>
+</body>
+{% endblock content %}

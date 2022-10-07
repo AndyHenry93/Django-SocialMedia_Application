@@ -13,6 +13,36 @@
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
+
+    
+    <header>
+        <div class="header_inner">
+            <div class="left-side">
+                <!-- Logo -->
+                <div id="logo">
+                    <a href="{% url 'index' %}">
+                        <b><h1 style="text-transform: uppercase;">Social Book</h1></b>
+                    </a>
+                </div>
+
+            </div>
+            <div class="right-side lg:pr-4">
+                <!-- profile -->
+
+                <a href="#">
+                    <img src="{{user_profile.profileimg.url}}" class="header-avatar" alt="">
+                </a>
+                <div uk-drop="mode: click;offset:9" class="header_dropdown profile_dropdown border-t">
+                    <ul>
+                        <li><a href="{% url 'upload' %}"> Upload Post</a></li>
+                        <li><a href="{% url 'settings' %}"> Account setting </a> </li>
+                        <li><a href="{% url 'logout' %}"> Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
     {% block content %}{% endblock content %}
 
      <!-- Scripts

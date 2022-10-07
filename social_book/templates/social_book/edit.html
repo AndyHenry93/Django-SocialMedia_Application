@@ -7,11 +7,6 @@
 {% block content %}
 <body>
     <div class="container m-auto"> 
-        <div>
-            <h1 class="text-2xl leading-none text-gray-900 tracking-tight mt-3"><a href="{% url 'index' %}"><b>Home</b></a></h1>
-        </div>
-        <br>
-        <hr>
         <div class="grid lg:grid-cols-3 mt-12 gap-8">
             <div class="bg-white rounded-md lg:shadow-lg shadow col-span-2">
             {% comment %} Form Creation {% endcomment %}
@@ -27,6 +22,7 @@
                             <input type="file" name="image">
                             <textarea class="button soft-warning small" name="caption">{{post.caption}}</textarea>
                             <button class=" button bg-blue-700" type="submit">Change</button>
+                            <span><button class=" button bg-blue-700"><a href="{% url 'index' %}">Cancel</a></button></span>
                         </div>
                     </form>
                 </div>

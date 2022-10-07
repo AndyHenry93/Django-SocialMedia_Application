@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import messages,auth
 from django.contrib.auth.decorators import login_required
-from .models import Profile, Post
+from .models import Profile, Post, Like_Post
 
 # Create your views here.
 @login_required(login_url='signin')
@@ -123,8 +123,8 @@ def upload(request):
         return render(request,'social_book/upload.html')
 
 @login_required(login_url='signin')
-def edit_post(request,id):
-    post = Post.objects.get(id=id)
+def edit_post(request,pk):
+    post = Post.objects.get(id=pk)
     context = {
         'post': post
     }
@@ -147,8 +147,8 @@ def edit_post(request,id):
         return render(request,'social_book/edit.html',context)
 
 @login_required(login_url='signin')
-def delete_post(request,id):
-    post = Post.objects.get(id=id)
+def delete_post(request,pk):
+    post = Post.objects.get(id=pk)
     context = {
             'post':post
         }
@@ -156,3 +156,38 @@ def delete_post(request,id):
         post.delete()
         return redirect('/')
     return render(request,'social_book/delete.html',context)
+
+@login_required(login_url='signin')
+def like_post(request):
+    username = request.user.username
+    post_id = request.GET.get('post_id')
+    post = Post.objects.get(id=post_id)
+    
+    like_filter = Like_Post.objects.filter(post_id=post_id,username=username).first()
+
+    if like_filter is None:
+        new_like = Like_Post.objects.create(post_id=post_id, username=username)
+        new_like.save() 
+        post.num_likes += 1
+        post.save()
+        return redirect('/')
+    else:
+        remove_like = like_filter
+        remove_like.delete()
+        post.num_likes -= 1
+        post.save()
+        return redirect('/')
+
+def profile(request, pk):
+    user_object = User.objects.get(username=pk)
+    user_profile = Profile.objects.get(user=user_object)
+    user_post = Post.objects.filter(user=pk)
+    context = {
+        'user_profile' : user_profile,
+        'user_object' :  user_object,
+        'user_post' : user_post,
+    }
+    return render(request,'social_book/profile.html',context)
+
+
+

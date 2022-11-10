@@ -24,7 +24,9 @@
                         <b><h1 style="text-transform: uppercase;">Social Book</h1></b>
                     </a>
                 </div>
-
+                <div>
+                    
+                </div>
             </div>
             <div class="right-side lg:pr-4">
                 <!-- profile -->
@@ -42,6 +44,27 @@
             </div>
         </div>
     </header>
+    <div class="header_inner">
+        <div class="left-side">
+            <form action="/search" method="POST">
+                {% csrf_token %}
+                <div class="left-side">
+                    <!-- Logo -->
+                    <div id="logo" class=" uk-hidden@s">
+                        <a href="home.html">
+                            <b><h1 style="text-transform: uppercase;">Social Book</h1></b>
+                        </a>
+                    </div>
+                    <!-- <div class="header_search"> -->
+                        <input type="text" name="username" placeholder="Search for username..">&nbsp; &nbsp;
+                        {% comment %} <button type="submit">lookup<i class="fa fa-search fa-1x"></i></button> {% endcomment %}
+                    <!-- </div> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 
     {% block content %}{% endblock content %}
 
